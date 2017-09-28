@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Address;
 use Yii;
 use app\models\Users;
 use app\models\SearchUsers;
@@ -45,18 +46,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single Users model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Users model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -65,16 +54,28 @@ class UsersController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->save()) {
-                return $this->redirect(['index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
         }
         else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionAddAddress() {
+        $model = new Address();
+        $model->load(Yii::$app->request->post());
+        $model->save();
+        return $this->redirect(['update', 'id' => $model->user_id]);
+    }
+
+    public function actionDeleteAddress($id) {
+        $id = Yii::$app->request->get('id');
+        $model = Address::findOne($id);
+        $model->delete();
+        return $this->redirect(['update', 'id' => $model->user_id]);
     }
 
     /**
@@ -86,13 +87,14 @@ class UsersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $address_model = new Address();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-//            return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'address_model' => $address_model,
             ]);
         }
     }

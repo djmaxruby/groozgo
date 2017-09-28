@@ -32,6 +32,7 @@ class Address extends \yii\db\ActiveRecord
         return [
             [['address', 'comment'], 'string'],
             [['user_id'], 'integer'],
+            [['address', 'comment'], 'required'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
