@@ -31,9 +31,10 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['birth_date'], 'safe'],
+            [['birth_date'], 'date', 'format' => 'yyyy-MM-dd'],
             [['gender'], 'integer'],
             [['name', 'surname'], 'string', 'max' => 255],
+            [['name', 'surname', 'birth_date', 'gender'], 'required'],
         ];
     }
 
@@ -44,10 +45,10 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'birth_date' => 'Birth Date',
-            'gender' => 'Gender',
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'birth_date' => 'Дата рождения',
+            'gender' => 'Пол',
         ];
     }
 

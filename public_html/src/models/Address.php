@@ -43,8 +43,8 @@ class Address extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'address' => 'Address',
-            'comment' => 'Comment',
+            'address' => 'Адрес',
+            'comment' => 'Комментарий',
             'user_id' => 'User ID',
         ];
     }
