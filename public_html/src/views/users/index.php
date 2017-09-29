@@ -29,7 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'surname',
-            'birth_date',
+            [
+                'attribute' => 'birth_date',
+                'filter' => '',
+            ],
             [
                 'attribute' => 'gender',
                 'filter' => [0 => 'Жен', 1 => 'Муж'],
