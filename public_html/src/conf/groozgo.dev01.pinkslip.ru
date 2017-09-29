@@ -7,9 +7,9 @@ server {
 	listen 80;
 	listen [::]:80;
 
-	server_name test.localhost www.test.localhost;
+	server_name groozgo.dev01.pinkslip.ru www.groozgo.dev01.pinkslip.ru;
 
-	root /var/www/test.localhost/public_html/src/web;
+	root /var/www/groozgo.dev01.pinkslip.ru/public_html/src/web;
 	
 	index index.php index.html;
 
