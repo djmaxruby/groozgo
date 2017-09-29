@@ -11,10 +11,10 @@ $this->title = 'My Yii Application';
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="btn btn-lg btn-success" href="/users">Get started with Users</a></p>
     </div>
 
-    <div class="body-content">
+    <!--div class="body-content">
 
         <div class="row">
             <div class="col-lg-4">
@@ -49,5 +49,5 @@ $this->title = 'My Yii Application';
             </div>
         </div>
 
-    </div>
+    </div-->
 </div>

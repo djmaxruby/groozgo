@@ -78,6 +78,22 @@ class UsersController extends Controller
         return $this->redirect(['update', 'id' => $model->user_id]);
     }
 
+    public function actionFormAddress() {
+        $id = Yii::$app->request->post('id');
+        $address = Yii::$app->request->post('address');
+        $comment = Yii::$app->request->post('comment');
+        $model = Address::findOne($id);
+        $user_id = $model->user_id;
+        if (Yii::$app->request->post('delete-button')) {
+            $model->delete();
+        }
+        else {
+            $model->address = $address;
+            $model->comment = $comment;
+            $model->save();
+        }
+        return $this->redirect(['update', 'id' => $user_id]);
+    }
     /**
      * Updates an existing Users model.
      * If update is successful, the browser will be redirected to the 'view' page.

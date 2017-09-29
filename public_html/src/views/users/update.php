@@ -2,7 +2,6 @@
 
 use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -16,13 +15,10 @@ $this->params['breadcrumbs'][] = ['label' => $model->name];
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php
-    Pjax::begin();
     echo $this->render('_form', [
         'model' => $model,
     ]);
-    Pjax::end();
 
-//    Pjax::begin();
     ?>
 
     <?php
@@ -41,7 +37,20 @@ $this->params['breadcrumbs'][] = ['label' => $model->name];
             </thead>
             <?php
             foreach ($model->addresses as $address) {
-                echo "<tr><td>".$address->address."</td><td>".$address->comment."</td><td>".Html::a('Удалить','delete-address?id='.$address->id)."</td></tr>";
+            ?>
+                <tr>
+                    <?=Html::beginForm(['users/form-address'], 'post')?>
+                    <?=Html::input('hidden', 'id', $address->id)?>
+                    <td><?=Html::input('text','address',$address->address,['class' => 'form-control'])?></td>
+                    <td><?=Html::input('text','comment',$address->comment,['class' => 'form-control'])?></td>
+                    <td>
+                        <?=Html::submitButton('Обновить', ['class' => 'btn btn-info'])?>
+                        <?=Html::submitButton('Удалить', ['class' => 'btn btn-danger', 'name' => 'delete-button', 'value' => 'delete'])?>
+                    </td>
+                    <?=Html::endForm()?>
+                </tr>
+            <?php
+//                echo "<tr><td>".$address->address."</td><td>".$address->comment."</td><td>".Html::a('Удалить','delete-address?id='.$address->id)."</td></tr>";
             }
             ?>
         </table>
@@ -67,7 +76,6 @@ $this->params['breadcrumbs'][] = ['label' => $model->name];
 
     <?php
     ActiveForm::end();
-//    Pjax::end();
     ?>
 
 
